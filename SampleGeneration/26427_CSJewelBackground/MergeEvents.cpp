@@ -9,6 +9,8 @@ using namespace std;
 #include "fastjet/ClusterSequenceArea.hh"
 using namespace fastjet;
 
+#include "CommandLine.h"
+
 struct Particle
 {
 public:
@@ -25,9 +27,15 @@ void WriteHepMC2(ofstream &out, vector<PseudoJet> &P);
 
 int main(int argc, char *argv[])
 {
-   ifstream in_jewel("test_jet.hepmc");
-   ifstream in_background("test_background.hepmc");
-   ofstream out("merged.hepmc");
+   CommandLine CL(argc, argv);
+
+   string JewelFileName      = CL.Get("Jewel");
+   string BackgroundFileName = CL.Get("Background");
+   string OutputFileName     = CL.Get("Output");
+
+   ifstream in_jewel(JewelFileName);
+   ifstream in_background(BackgroundFileName);
+   ofstream out(OutputFileName);
 
    out << "HepMC::Version 2.06.05" << endl;
    out << "HepMC::IO_GenEvent-START_EVENT_LISTING" << endl;
