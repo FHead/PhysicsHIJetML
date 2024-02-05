@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
       Subtractor.set_max_distance(999);
       Subtractor.set_alpha(1);
       // Subtractor.set_do_mass_subtraction(true);
-      // Subtractor.set_remove_all_zero_pt_particles(true);
+      Subtractor.set_remove_all_zero_pt_particles(true);
       PseudoJet Subtracted = join(Subtractor.do_subtraction(Particles, Ghosts));
 
       vector<PseudoJet> FJGhost, FJParticle;
@@ -188,7 +188,7 @@ void WriteHepMC2(ofstream &out, vector<PseudoJet> &P)
    for(int i = 0; i < (int)P.size(); i++)
    {
       PseudoJet &p = P[i];
-      out << "P " << i + 2 << " " << p.user_index() << " " << p.px() << " " << p.py() << " " << p.pz()
+      out << "P " << i + 3 << " " << p.user_index() << " " << p.px() << " " << p.py() << " " << p.pz()
          << " " << p.e() << " " << p.m() << " 1 0 0   0 0" << endl;
    }
 }
